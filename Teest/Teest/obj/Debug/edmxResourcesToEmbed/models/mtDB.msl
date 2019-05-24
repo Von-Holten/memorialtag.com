@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="memorialtagModelStoreContainer" CdmEntityContainer="memorialtagEntities">
+    <EntitySetMapping Name="Grav">
+      <EntityTypeMapping TypeName="memorialtagModel.Grav">
+        <MappingFragment StoreEntitySet="Grav">
+          <ScalarProperty Name="GravID" ColumnName="GravID" />
+          <ScalarProperty Name="KirkeID" ColumnName="KirkeID" />
+          <ScalarProperty Name="Fornavn" ColumnName="Fornavn" />
+          <ScalarProperty Name="Efternavn" ColumnName="Efternavn" />
+          <ScalarProperty Name="Fødselsdato" ColumnName="Fødselsdato" />
+          <ScalarProperty Name="Dødsdato" ColumnName="Dødsdato" />
+          <ScalarProperty Name="Fødeby" ColumnName="Fødeby" />
+          <ScalarProperty Name="SidsteBopæl" ColumnName="SidsteBopæl" />
+          <ScalarProperty Name="Stilling" ColumnName="Stilling" />
+          <ScalarProperty Name="NærmestePårørende" ColumnName="NærmestePårørende" />
+          <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
+          <ScalarProperty Name="MyHeritageLink" ColumnName="MyHeritageLink" />
+          <ScalarProperty Name="Biografi" ColumnName="Biografi" />
+          <ScalarProperty Name="Uddannelse" ColumnName="Uddannelse" />
+          <ScalarProperty Name="Karriere" ColumnName="Karriere" />
+          <ScalarProperty Name="Bedrifter" ColumnName="Bedrifter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login">
+      <EntityTypeMapping TypeName="memorialtagModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

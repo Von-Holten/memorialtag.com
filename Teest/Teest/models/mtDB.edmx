@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="memorialtagModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Grav">
+          <Key>
+            <PropertyRef Name="GravID" />
+          </Key>
+          <Property Name="GravID" Type="int" Nullable="false" />
+          <Property Name="KirkeID" Type="int" Nullable="false" />
+          <Property Name="Fornavn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Efternavn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fødselsdato" Type="date" Nullable="false" />
+          <Property Name="Dødsdato" Type="date" Nullable="false" />
+          <Property Name="Fødeby" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SidsteBopæl" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stilling" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NærmestePårørende" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FacebookLink" Type="varchar" MaxLength="100" />
+          <Property Name="MyHeritageLink" Type="varchar" MaxLength="100" />
+          <Property Name="Biografi" Type="varchar" MaxLength="1000" />
+          <Property Name="Uddannelse" Type="varchar" MaxLength="1000" />
+          <Property Name="Karriere" Type="varchar" MaxLength="1000" />
+          <Property Name="Bedrifter" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="memorialtagModelStoreContainer">
+          <EntitySet Name="Grav" EntityType="Self.Grav" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="memorialtagModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Grav">
+          <Key>
+            <PropertyRef Name="GravID" />
+          </Key>
+          <Property Name="GravID" Type="Int32" Nullable="false" />
+          <Property Name="KirkeID" Type="Int32" Nullable="false" />
+          <Property Name="Fornavn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Efternavn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fødselsdato" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Dødsdato" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fødeby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SidsteBopæl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Stilling" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NærmestePårørende" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FacebookLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MyHeritageLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Biografi" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Uddannelse" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Karriere" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Bedrifter" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="memorialtagEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Grav" EntityType="Self.Grav" />
+          <EntitySet Name="Login" EntityType="Self.Login" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="memorialtagModelStoreContainer" CdmEntityContainer="memorialtagEntities">
+          <EntitySetMapping Name="Grav">
+            <EntityTypeMapping TypeName="memorialtagModel.Grav">
+              <MappingFragment StoreEntitySet="Grav">
+                <ScalarProperty Name="GravID" ColumnName="GravID" />
+                <ScalarProperty Name="KirkeID" ColumnName="KirkeID" />
+                <ScalarProperty Name="Fornavn" ColumnName="Fornavn" />
+                <ScalarProperty Name="Efternavn" ColumnName="Efternavn" />
+                <ScalarProperty Name="Fødselsdato" ColumnName="Fødselsdato" />
+                <ScalarProperty Name="Dødsdato" ColumnName="Dødsdato" />
+                <ScalarProperty Name="Fødeby" ColumnName="Fødeby" />
+                <ScalarProperty Name="SidsteBopæl" ColumnName="SidsteBopæl" />
+                <ScalarProperty Name="Stilling" ColumnName="Stilling" />
+                <ScalarProperty Name="NærmestePårørende" ColumnName="NærmestePårørende" />
+                <ScalarProperty Name="FacebookLink" ColumnName="FacebookLink" />
+                <ScalarProperty Name="MyHeritageLink" ColumnName="MyHeritageLink" />
+                <ScalarProperty Name="Biografi" ColumnName="Biografi" />
+                <ScalarProperty Name="Uddannelse" ColumnName="Uddannelse" />
+                <ScalarProperty Name="Karriere" ColumnName="Karriere" />
+                <ScalarProperty Name="Bedrifter" ColumnName="Bedrifter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="memorialtagModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

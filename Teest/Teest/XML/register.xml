@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Salg>
+  <Kunde>
+    <Navn>Christian3 Pedersen</Navn>
+    <Mail>admin111@test.dk</Mail>
+    <Telefon>30267686</Telefon>
+    <Vej>123456</Vej>
+  </Kunde>
+  <Kunde>
+    <Navn>Dan Sørensen</Navn>
+    <Mail>admin333@test.dk</Mail>
+    <Telefon>69138505</Telefon>
+    <Vej>valbyvej</Vej>
+    <Tidspunkt>fredag, 24 maj 2019</Tidspunkt>
+  </Kunde>
+</Salg>

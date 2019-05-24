@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="memorialtagModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Grav">
+    <Key>
+      <PropertyRef Name="GravID" />
+    </Key>
+    <Property Name="GravID" Type="int" Nullable="false" />
+    <Property Name="KirkeID" Type="int" Nullable="false" />
+    <Property Name="Fornavn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Efternavn" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Fødselsdato" Type="date" Nullable="false" />
+    <Property Name="Dødsdato" Type="date" Nullable="false" />
+    <Property Name="Fødeby" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SidsteBopæl" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Stilling" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NærmestePårørende" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="FacebookLink" Type="varchar" MaxLength="100" />
+    <Property Name="MyHeritageLink" Type="varchar" MaxLength="100" />
+    <Property Name="Biografi" Type="varchar" MaxLength="1000" />
+    <Property Name="Uddannelse" Type="varchar" MaxLength="1000" />
+    <Property Name="Karriere" Type="varchar" MaxLength="1000" />
+    <Property Name="Bedrifter" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="memorialtagModelStoreContainer">
+    <EntitySet Name="Grav" EntityType="Self.Grav" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

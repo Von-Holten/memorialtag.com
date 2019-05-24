@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="memorialtagModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Grav">
+    <Key>
+      <PropertyRef Name="GravID" />
+    </Key>
+    <Property Name="GravID" Type="Int32" Nullable="false" />
+    <Property Name="KirkeID" Type="Int32" Nullable="false" />
+    <Property Name="Fornavn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Efternavn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fødselsdato" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Dødsdato" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Fødeby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SidsteBopæl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Stilling" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NærmestePårørende" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FacebookLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MyHeritageLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Biografi" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Uddannelse" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Karriere" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Bedrifter" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="memorialtagEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Grav" EntityType="Self.Grav" />
+    <EntitySet Name="Login" EntityType="Self.Login" />
+  </EntityContainer>
+</Schema>

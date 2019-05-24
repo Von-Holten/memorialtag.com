@@ -1,0 +1,497 @@
+/*#############################################*/
+/*################# RESEST CSS ################*/
+/*#############################################*/
+/*  http://meyerweb.com/eric/tools/css/reset/  */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, label{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*#############################################*/
+/*################ Hele Siden #################*/
+/*#############################################*/
+
+html { height:100vh; }
+body {
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    background-color: lightslategrey;
+    /*overflow: hidden;*/
+}
+
+/*#############################################*/
+/*################### Header ##################*/
+/*#############################################*/
+
+header {
+    background-color: white;
+    text-align: center;
+    width: 80vw;
+    margin-left: 10vw;
+    border-radius: 10px;
+    margin-top: 1vh;
+    height: 10vh;
+}
+
+/*#############################################*/
+/*################### Footer ##################*/
+/*#############################################*/
+
+footer {
+    background-color: white;
+    clear: both;
+    width: 70vw;
+    height: 2vh;
+    margin-left: 10vw;
+    margin-bottom: 1vh;
+    padding-top: 2vh;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    border-radius: 10px;
+    line-height: 1vh;
+}
+
+/*#############################################*/
+/*################### Section #################*/
+/*#############################################*/
+
+section {
+  background-color: white;
+  clear: both;
+  width: 70vw;
+  height: auto;
+  margin-left: 10vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-right: 5vw;
+  padding-left: 5vw;
+  border-radius: 10px;
+  margin-bottom: 1vh;
+}
+
+section.login {
+    height: 25vh;
+    float: left;
+    margin-left: 10vw;
+    width: 29.5vw;
+    background-color: white;
+    border-radius: 10px;
+
+}
+
+section.register {
+    width: 70vw;
+    height: 34vh;
+}
+
+section.relationer {
+    height: auto;
+    float: left;
+    width: 29.5vw;
+}
+
+section.galleri {
+  height: 68vh;
+}
+
+section.thumbnails{
+  height: 20vh;
+}
+
+/*#############################################*/
+/*################### Article #################*/
+/*#############################################*/
+
+article {
+    width: 70vw;
+    background: white;
+    margin-left: 10vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+    border-radius: 10px;
+    height: 43vh;
+}
+
+article.search {
+    height: 6vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-right: 1vw;
+    padding-left: 20vw;
+    width: 59vw;
+}
+
+article.galleri {
+	  height: 30vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+article.info {
+    height: 43vh;
+	width: 43vw;
+    float: left;
+    margin-right: 1vh;
+}
+
+article.minimum{
+    min-height: 45vh;
+    height: auto;
+}
+
+/*#############################################*/
+/*################### Aside ###################*/
+/*#############################################*/
+
+aside {
+    margin-right: 9vw;
+    margin-bottom: 1vh;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    width: 29.5vw;
+    background-color: white;
+    border-radius: 10px;
+    float: right;
+}
+
+aside.buy {
+    height: 25vh;
+    float: right;
+    width: 29.5vw;
+    background-image: url(./images/avatar.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 25% 70%;
+    margin-left: 0vw;
+    margin-right: 10vw;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+}
+
+aside.img {
+    height: 45vh;
+    width: 16vw;
+    margin-top: 1vh;
+    float: right;
+}
+
+aside.imgUpload {
+    height: 45vh;
+    width: 26vw;
+    margin-top: 1vh;
+    float: right;
+    padding-right: 0vw;
+    padding-left: 0vh;
+    text-align: center;
+        
+}
+
+.billede {
+    vertical-align: middle;
+    position: relative;
+}
+
+aside.timeline {
+    height: auto;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+/*#############################################*/
+/*################## Input ####################*/
+/*#############################################*/
+
+input[type=email], input[type=password], input[type=text], input[type=number] {
+    width: 28vw;
+    height: 1vh;
+    padding: 1.2vh 1.2vh;
+    margin: 1vh 0vh;
+    border: 1px solid #ccc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.8vh;
+    border-radius: 25px;
+}
+
+input, textarea {
+    margin: 1vh 0vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.8vh;
+}
+
+input[type=email].edit, input[type=password].edit, input[type=text].edit, input[type=number].edit {
+    width: 16vw;
+    height: 1vh;
+    padding: 1.2vh 1.2vh;
+    margin: -0.8vh 0vh;
+    font-size: 1.8vh;
+}
+
+input[type=email].small, input[type=password].small, input[type=text].small, input[type=number].small, label.small {
+    width: 10vw;
+    height: 1vh;
+    padding: 1.2vh 1.2vh;
+    margin: -0.8vh 0vh;
+    font-size: 1.8vh;
+}
+
+/*#############################################*/
+/*################### Knapper #################*/
+/*#############################################*/
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1vh 0;
+    margin: 1vh 0;
+    border: none;
+    cursor: pointer;
+    width: 13.5vw;
+  	height: 3.5vh;
+    border-radius: 25px;
+}
+
+.smallButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1vh 0;
+    margin: 1vh 0;
+    border: none;
+    cursor: pointer;
+    width: 3vw;
+    height: 3.5vh;
+    border-radius: 25px;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+/*#############################################*/
+/*##################### Div ###################*/
+/*#############################################*/
+
+div.div {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.border{
+    border-bottom: groove;
+    border-bottom-color: black;
+    border-bottom-width: thin;
+}
+
+/*#############################################*/
+/*################### TEKST ###################*/
+/*#############################################*/
+
+h1{
+    font-size: 4vmin;
+    }
+
+h2{
+    font-size: 2.5vmin;
+}
+
+h3{
+    font-size: 2vmin;
+    margin-bottom: 1vmin;
+}
+
+h4{
+    font-size: 2.5vmin;
+    font-weight: lighter;
+}
+
+p{
+    font-size: 2vmin;
+}
+
+a{
+    font-size: 1.5vmin;
+}
+
+label{
+    font-size: 1.8vmin;
+    font-weight: bold;
+}
+
+li{
+    font-size: 2vmin;
+    margin-bottom: 0.6vh;
+}
+
+th{
+    font-size: 2.2vmin;
+}
+
+td{
+    font-size: 3.2vmin;
+	padding-bottom: 2vmin;
+}
+
+/*#############################################*/
+/*################## Klasser ##################*/
+/*#############################################*/
+
+.wrapper{
+    display: inline-block;
+}
+
+/*#############################################*/
+/*################## Billeder #################*/
+/*#############################################*/
+
+div.some{
+    margin-top: 3vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    color: white;
+}
+
+img {
+    border-radius: 5%;
+}
+
+/*#############################################*/
+/*#################### Links ##################*/
+/*#############################################*/
+
+a:hover {
+	opacity: 0.7;
+}
+
+
+/*Selectors:
+Elementer:
+test{}
+
+ID (1 ID kan kun bruges en gang pr. html side):
+#test{}
+
+Gruppering:
+test1, test2, test3{}
+
+Klasser:
+.test{}
+
+Element + Klasse:
+test.test{}
+
+ID + Element:
+#test.test{}
+
+@media screen and (max-widh: 300 px{
+a{
+font-size: 8px;
+}
+})
+
+
+*/
+
+.tableView {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .tableView td, .tableView th {
+        border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .tableView tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .tableView tr:hover {
+        background-color: #ddd;
+    }
+
+    .tableView th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+    .tableView button {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: right;
+    }
+
+
+
+
+.modalBackground{
+        background-color: gray;
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+
+.modalPopup {
+    background-color: #FFFFFF;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    padding-top: 10px;
+    padding-left: 10px;
+    width: 300px;
+    height: 140px;
+}
