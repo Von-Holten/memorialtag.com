@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Net.Mail;
 using System.Net;
+using System.IO;
 
 namespace teest
 {
@@ -97,7 +98,10 @@ namespace teest
             test2 = (DataView)SqlDataSource2.Select(DataSourceSelectArguments.Empty);
             string gravID = test2.Table.Rows[0][0].ToString();
 
-
+            if (!Directory.Exists(Server.MapPath("./Uploads/" + gravID + "/")))
+                {
+                    Directory.CreateDirectory("./ Uploads /" + gravID + "/");
+                }
 
 
             MailMessage mm = new MailMessage("chsdk89@gmail.com", "chsecurity@live.dk");
