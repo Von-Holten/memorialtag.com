@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProduktDetaljer.aspx.cs" Inherits="teest.ProduktDetaljer" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="mainContent" runat="server">
+
     <style>
         .tableView2 {
             border-collapse: collapse;

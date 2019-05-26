@@ -8,6 +8,7 @@ using System.IO;
 using System.Data;
 using System.Data.SqlClient;
 using AjaxControlToolkit;
+using System.Globalization;
 
 namespace Teest
 {
@@ -25,33 +26,35 @@ namespace Teest
                 SqlDataSource1.ID = "SqlDataSource1";
                 this.Page.Controls.Add(SqlDataSource1);
                 SqlDataSource1.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["memorialtagConnectionString"].ConnectionString;
+                SqlDataSource1.CancelSelectOnNullParameter = true;
                 SqlDataSource1.SelectCommand = "SELECT [Fornavn], [Efternavn], [Fødselsdato], [Dødsdato], [Fødeby], [SidsteBopæl], [Stilling], [NærmestePårørende], [FacebookLink], [MyHeritageLink], [Biografi], [Uddannelse], [Karriere], [Bedrifter] FROM [memorialtag].[dbo].[GravTabel] WHERE (GravID = '" + ID + "')";
 
                 //Error handling med try catch - Her sættes data fra SQL ind i de forskellige tekstbokses
                 try
                 {
                     DataView test = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
-                    txtFornavn.Text = test.Table.Rows[0]["Fornavn"].ToString();
-                    txtEfternavn.Text = test.Table.Rows[0]["Efternavn"].ToString();
-                    DateTime føsdag = DateTime.Parse(test.Table.Rows[0]["Fødselsdato"].ToString());
-                    txtFødselsdato.Text = føsdag.ToShortDateString();
-                    DateTime dødsdato = DateTime.Parse(test.Table.Rows[0]["Dødsdato"].ToString());
-                    txtDødsdato.Text = dødsdato.ToShortDateString();
-                    txtFødeby.Text = test.Table.Rows[0]["Fødeby"].ToString();
-                    txtSidsteBopæl.Text = test.Table.Rows[0]["SidsteBopæl"].ToString();
-                    txtStilling.Text = test.Table.Rows[0]["Stilling"].ToString();
-                    txtNærmestePårørende.Text = test.Table.Rows[0]["NærmestePårørende"].ToString();
-                    txtFacebookLink.Text = test.Table.Rows[0]["FacebookLink"].ToString();
-                    txtMyHeritageLink.Text = test.Table.Rows[0]["MyHeritageLink"].ToString();
-                    txtaBiografi.Text = test.Table.Rows[0]["Biografi"].ToString();
-                    txtaUddannelse.Text = test.Table.Rows[0]["Uddannelse"].ToString();
-                    txtaKarriere.Text = test.Table.Rows[0]["Karriere"].ToString();
-                    txtaBedrifter.Text = test.Table.Rows[0]["Bedrifter"].ToString();
+                    if (test.Table.Rows[0]["Fornavn"].ToString() != null) { txtFornavn.Text = test.Table.Rows[0]["Fornavn"].ToString(); }
+                    if (test.Table.Rows[0]["Efternavn"].ToString() != null) { txtEfternavn.Text = test.Table.Rows[0]["Efternavn"].ToString(); }
+                    if (test.Table.Rows[0]["Fødselsdato"].ToString() != null) { DateTime føsdag = DateTime.Parse(test.Table.Rows[0]["Fødselsdato"].ToString()); txtFødselsdato.Text = føsdag.ToShortDateString(); }
+                    if (test.Table.Rows[0]["Dødsdato"].ToString() != null) { DateTime dødsdag = DateTime.Parse(test.Table.Rows[0]["Dødsdato"].ToString()); txtDødsdato.Text = dødsdag.ToShortDateString(); }
+                    if (test.Table.Rows[0]["Fødeby"].ToString() != null) { txtFødeby.Text = test.Table.Rows[0]["Fødeby"].ToString(); }
+                    if (test.Table.Rows[0]["SidsteBopæl"].ToString() != null) { txtSidsteBopæl.Text = test.Table.Rows[0]["SidsteBopæl"].ToString(); }
+                    if (test.Table.Rows[0]["Stilling"].ToString() != null) { txtStilling.Text = test.Table.Rows[0]["Stilling"].ToString(); }
+                    if (test.Table.Rows[0]["NærmestePårørende"].ToString() != null) { txtNærmestePårørende.Text = test.Table.Rows[0]["NærmestePårørende"].ToString(); }
+                    if (test.Table.Rows[0]["FacebookLink"].ToString() != null) { txtFacebookLink.Text = test.Table.Rows[0]["FacebookLink"].ToString(); }
+                    if (test.Table.Rows[0]["MyHeritageLink"].ToString() != null) { txtMyHeritageLink.Text = test.Table.Rows[0]["MyHeritageLink"].ToString(); }
+                    if (test.Table.Rows[0]["Biografi"].ToString() != null) { txtaBiografi.Text = test.Table.Rows[0]["Biografi"].ToString(); }
+                    if (test.Table.Rows[0]["Uddannelse"].ToString() != null) { txtaUddannelse.Text = test.Table.Rows[0]["Uddannelse"].ToString(); }
+                    if (test.Table.Rows[0]["Karriere"].ToString() != null) { txtaKarriere.Text = test.Table.Rows[0]["Karriere"].ToString(); }
+                    if (test.Table.Rows[0]["Bedrifter"].ToString() != null) { txtaBedrifter.Text = test.Table.Rows[0]["Bedrifter"].ToString(); }
+
+                    if (!Directory.Exists(Server.MapPath(@"~/Uploads/" + ID)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath(@"~/Uploads/" + ID));
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    labError.Visible = true;
-                    labError.Text = "Der er sket en fejl, prøv venligst igen.";
                 }
             }
             
@@ -59,7 +62,7 @@ namespace Teest
 
             //Det der sker når der klikkes på knappen i bunden af siden
             protected void btnAfslutRedigering_Click(object sender, EventArgs e)
-        {
+            {
             string ID = Request.QueryString["id"];
             //Hvis vores fileupload til profilbilleder har en fil
             if (fileUploadProfile.HasFile)
@@ -102,27 +105,11 @@ namespace Teest
                 SqlDataSource2.ID = "SqlDataSource2";
                 this.Page.Controls.Add(SqlDataSource2);
                 SqlDataSource2.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["memorialtagConnectionString"].ConnectionString;
-                //SqlDataSource2.InsertCommand = "INSERT INTO [Grav] ([Fornavn], [Efternavn], [Fødselsdato], [Dødsdato], [Fødeby], [SidsteBopæl], [Stilling], [NærmestePårørende], [FacebookLink], [MyHeritageLink], [Biografi], [Uddannelse], [Karriere], [Bedrifter]) VALUES (@KirkeID, @Fornavn, @Efternavn, @Fødselsdato, @Dødsdato, @Fødeby, @SidsteBopæl, @Stilling, @NærmestePårørende, @FacebookLink, @MyHeritageLink, @Biografi, @Uddannelse, @Karriere, @Bedrifter)";
-                //SqlDataSource2.InsertParameters.Add("Fornavn", txtFornavn.Text);
-                //SqlDataSource2.InsertParameters.Add("Efternavn", txtEfternavn.Text);
-                //SqlDataSource2.InsertParameters.Add("Fødselsdato", txtFødselsdato.Text);
-                //SqlDataSource2.InsertParameters.Add("Dødsdato", txtDødsdato.Text);
-                //SqlDataSource2.InsertParameters.Add("Fødeby", txtFødeby.Text);
-                //SqlDataSource2.InsertParameters.Add("SidsteBopæl", txtSidsteBopæl.Text);
-                //SqlDataSource2.InsertParameters.Add("Stilling", txtStilling.Text);
-                //SqlDataSource2.InsertParameters.Add("NærmestePårørende", txtNærmestePårørende.Text);
-                //SqlDataSource2.InsertParameters.Add("FacebookLink", txtFacebookLink.Text);
-                //SqlDataSource2.InsertParameters.Add("MyHeritageLink", txtMyHeritageLink.Text);
-                //SqlDataSource2.InsertParameters.Add("Biografi", txtaBiografi.Text);
-                //SqlDataSource2.InsertParameters.Add("Uddannelse", txtaUddannelse.Text);
-                //SqlDataSource2.InsertParameters.Add("Karriere", txtaKarriere.Text);
-                //SqlDataSource2.InsertParameters.Add("Bedrifter", txtaBedrifter.Text);
-                //SqlDataSource2.Insert();
-                SqlDataSource2.UpdateCommand = @"UPDATE [memorialtag].[dbo].[GravTabel] SET [Fornavn] = @Fornavn, [Efternavn] = @Efternavn, [Fødselsdato] = @Fødselsdato, [Dødsdato] = @Dødsdato, [Fødeby] = @Fødeby, [SidsteBopæl] = @SidsteBopæl, [Stilling] = @Stilling, [NærmestePårørende] = @NærmestePårørende, [FacebookLink] = @FacebookLink, [MyHeritageLink] = @MyHeritageLink, [Biografi] = @Biografi, [Uddannelse] = @Uddannelse, [Karriere] = @Karriere, [Bedrifter] = @Bedrifter WHERE ([GravID] = 1)";
+                SqlDataSource2.UpdateCommand = @"UPDATE [memorialtag].[dbo].[GravTabel] SET [Fornavn] = @Fornavn, [Efternavn] = @Efternavn, [Fødselsdato] = @Fødselsdato, [Dødsdato] = @Dødsdato, [Fødeby] = @Fødeby, [SidsteBopæl] = @SidsteBopæl, [Stilling] = @Stilling, [NærmestePårørende] = @NærmestePårørende, [FacebookLink] = @FacebookLink, [MyHeritageLink] = @MyHeritageLink, [Biografi] = @Biografi, [Uddannelse] = @Uddannelse, [Karriere] = @Karriere, [Bedrifter] = @Bedrifter WHERE ([GravID] = '" +ID+ "')";
                 SqlDataSource2.UpdateParameters.Add("Fornavn", txtFornavn.Text);
                 SqlDataSource2.UpdateParameters.Add("Efternavn", txtEfternavn.Text);
-                SqlDataSource2.UpdateParameters.Add("Fødselsdato", txtFødselsdato.Text);
-                SqlDataSource2.UpdateParameters.Add("Dødsdato", txtDødsdato.Text);
+                SqlDataSource2.UpdateParameters.Add("Fødselsdato", DateTime.ParseExact(txtFødselsdato.Text, "dd-MM-yyyy", null).ToString("MM-dd-yyyy"));    //Her parser vi strengen så den passer med det format vores SQL kan læse
+                SqlDataSource2.UpdateParameters.Add("Dødsdato", DateTime.ParseExact(txtDødsdato.Text, "dd-MM-yyyy", null).ToString("MM-dd-yyyy"));          //Her parser vi strengen så den passer med det format vores SQL kan læse
                 SqlDataSource2.UpdateParameters.Add("Fødeby", txtFødeby.Text);
                 SqlDataSource2.UpdateParameters.Add("SidsteBopæl", txtSidsteBopæl.Text);
                 SqlDataSource2.UpdateParameters.Add("Stilling", txtStilling.Text);
@@ -138,8 +125,8 @@ namespace Teest
             catch(Exception ex)
             {
                 labError.Visible = true;
-                //labError.Text = ex.ToString();
-                labError.Text = "Der er desværre sket en fejl!";
+                labError.Text = ex.ToString();
+                //labError.Text = "Der er desværre sket en fejl!";
             }
         }
 

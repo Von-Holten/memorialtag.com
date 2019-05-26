@@ -49,6 +49,15 @@ namespace Teest {
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
+        /// rememberTekst control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rememberTekst;
+        
+        /// <summary>
         /// remember control.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,15 @@ namespace Teest {
         protected global::System.Web.UI.WebControls.Button btnLogin;
         
         /// <summary>
+        /// linkTekst control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl linkTekst;
+        
+        /// <summary>
         /// linkGlemtKode control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace Teest {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor linkGlemtKode;
+        
+        /// <summary>
+        /// logUd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button logUd;
         
         /// <summary>
         /// labelLoginError control.

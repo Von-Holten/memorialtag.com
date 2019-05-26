@@ -124,14 +124,6 @@
     <Content Include="products.aspx" />
     <Content Include="ProduktDetaljer.aspx" />
     <Content Include="register.aspx" />
-    <Content Include="scripts\dropzone\basic.css" />
-    <Content Include="scripts\dropzone\basic.min.css" />
-    <Content Include="scripts\dropzone\dropzone-amd-module.js" />
-    <Content Include="scripts\dropzone\dropzone-amd-module.min.js" />
-    <Content Include="scripts\dropzone\dropzone.css" />
-    <Content Include="scripts\dropzone\dropzone.js" />
-    <Content Include="scripts\dropzone\dropzone.min.css" />
-    <Content Include="scripts\dropzone\dropzone.min.js" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="scripts\jquery-3.4.1.js" />
@@ -139,6 +131,7 @@
     <Content Include="scripts\jquery-3.4.1.slim.js" />
     <Content Include="scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="search.aspx" />
+    <Content Include="ShoppingCart.aspx" />
     <Content Include="some\bloggr.png" />
     <Content Include="some\deviantart.png" />
     <Content Include="some\digg.png" />
@@ -223,6 +216,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mtDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="models\DataAccess.cs" />
+    <Compile Include="models\ShoppingCart.cs" />
     <Compile Include="NotApproved.aspx.cs">
       <DependentUpon>NotApproved.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -265,6 +260,13 @@
     </Compile>
     <Compile Include="search.aspx.designer.cs">
       <DependentUpon>search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingCart.aspx.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShoppingCart.aspx.designer.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

@@ -19,9 +19,9 @@
         </div>
 
         <div class="div">
-            <p>Tekst her</p>
-            <p>Tekst her</p>
-            <p>Tekst her</p>
+            <p></p>
+            <p></p>
+            <p></p>
         </div>
     </article>
 
@@ -43,9 +43,10 @@
         <label for="password"><b>Kodeord:</b></label>
         <asp:TextBox ID="txtPassword" TextMode="Password" runat="server"></asp:TextBox>
         <div class="div">
-            <p>Husk mig:<input type="checkbox" name="remember" id="remember" checked="checked" runat="server"/></p>
+            <p id="rememberTekst" runat="server">Husk mig:<input type="checkbox" name="remember" id="remember" checked="checked" runat="server"/></p>
             <asp:Button ID="btnLogin" runat="server" Text="Godkend" OnClick="btnLogin_Click" Class="button"/>
-            <p>Glemt <a href="#" id="linkGlemtKode" runat="server">kodeord?</a></p>
+            <p id="linkTekst" runat="server">Glemt <a href="#" id="linkGlemtKode" runat="server">kodeord?</a></p>
+            <asp:Button ID="logUd" runat="server" Text="Log Af" visible="false" OnClick="logUd_Click" class="button" BackColor="red"/>
         </div>
         <center><asp:Label ID="labelLoginError" runat="server" Text="Angiv veligst korrekt brugernavn og kode!" Visible="false" ForeColor="#CC0000"></asp:Label></center>
     </section>
@@ -64,10 +65,11 @@
         <center><asp:Button runat="server" Class="button" text="Bestil Memorial Tag" ID="btnBestil" OnClick="btnBestil_Click"/></center>
     </aside> 
 
+    <%-- Vores Modal Popup vindue der vises når der trykkes på Skift Kodeord linket --%>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <ajaxToolkit:ModalPopupExtender ID="mp1" runat="server" PopupControlID="Panel1" TargetControlID="linkGlemtKode" CancelControlID="btnClose" BackgroundCssClass="modalBackground" DropShadow="true">
-
     </ajaxToolkit:ModalPopupExtender>
+    <%-- Indholdet i popup kassen ligger indenfor Panelets tags --%>
     <asp:Panel ID="Panel1" runat="server" Class="modalPopup" align="center" style="Display: none; height: 24vh; width: 25vw;">
         <div style="height: 50vh;">
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">

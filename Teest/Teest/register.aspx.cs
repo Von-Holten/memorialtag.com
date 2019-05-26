@@ -34,7 +34,7 @@ namespace Teest
                 SqlDataSource1.SelectCommand = "Select Mail FROM KundeTabel";
                 DataView dv = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
                 //Her ser vi om emailen allerede er i brug
-                if (dv[0][0].ToString().Trim().Equals(txtEmail.Text)) { labError.Visible = true; labError.Text = "Den angive email eksisterer allerede."; }
+                if (dv[0]["Mail"].ToString().Trim().Equals(txtEmail.Text)) { labError.Visible = true; labError.Text = "Den angive email eksisterer allerede."; }
                 else
                 {
                     SqlDataSource1.SelectCommand = "SELECT COUNT(1) FROM LoginTabel WHERE Brugernavn='" + txtEmail.Text + "'"; //Vores SELECT statement
@@ -54,18 +54,23 @@ namespace Teest
                         SqlDataSource1.InsertParameters.Add("Vej", txtVej.Text);
                         SqlDataSource1.Insert();
 
+
+                        //Her finder vi kundens KundeID
                         SqlDataSource1.SelectCommand = "SELECT KundeID FROM KundeTabel WHERE Mail = '" + txtEmail.Text + "'";
                         DataView test = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);       //Laver et test dataview til vores template
                         String KundeID = test.Table.Rows[0]["KundeID"].ToString();                             //Tester om der er lagt data i vores dataview
 
+                        //Her opretter vi et Login til kunden
                         SqlDataSource1.InsertCommand = "INSERT INTO [LoginTabel] (KundeID, Brugernavn, Adgangskode) VALUES (@KundeID, @Brugernavn, @Adgangskode)";
                         SqlDataSource1.InsertParameters.Add("KundeID", KundeID);
                         SqlDataSource1.InsertParameters.Add("Brugernavn", txtEmail.Text);
                         SqlDataSource1.InsertParameters.Add("Adgangskode", txtPassword.Text);
                         SqlDataSource1.Insert();
 
+                        //Her sætter vi vores sessions variabel til brugernavnet
                         Session["username"] = txtEmail.Text;
 
+                        //Opretter en XML fil hvis den ikke allerede findes
                         if (!File.Exists(Server.MapPath("./XML/register.xml")))
                         {
                             XmlTextWriter xwriter = new XmlTextWriter(Server.MapPath("./XML/register.xml"), Encoding.UTF8);
@@ -89,7 +94,7 @@ namespace Teest
                             xwriter.Close();
                         }
                         else
-                        {
+                        {   //Skriver til en eksisterende XML fil (append)
                             string path = Server.MapPath("./XML/register.xml");
                             XDocument doc = XDocument.Load(path);
                             XElement salg = doc.Element("Salg");

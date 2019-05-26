@@ -18,11 +18,11 @@
 .tableView tr:nth-child(even){background-color: #f2f2f2;}
 .tableView tr:hover {background-color: #ddd;}
 
-    .modalBackground{
-        background-color: gray;
-        filter: alpha(opacity=50);
-        opacity: 0.5;
-    }
+.modalBackground{
+    background-color: gray;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
 
 .modalPopup {
     background-color: #FFFFFF;
@@ -51,14 +51,14 @@
 						<th style="width: 30%;">Fornavn:</th>
 						<th style="width: 30%;">Efternavn:</th>
                         <th style="width: 30%;">Password:</th>
-                        <th rowspan="4" style="width: 10%;">
-                            <asp:Button ID="Button2" runat="server" Text="Gå til produkter" class="button" style="width: 10vw;"/>
+                        <th rowspan="4" style="width: 10%;"><br />
+                            <asp:Button ID="Button2" runat="server" Text="Gå til produkter" class="button" style="height:10vh; width: 10vw;" OnClick="Button2_Click"/>
                         </th>
 					</tr>
 					<tr>
 						<td><asp:Label ID="labFornavn" runat="server" Text="Label"></asp:Label></td>
 						<td><asp:Label ID="labEfternavn" runat="server" Text="Label"></asp:Label></td>
-                        <td><asp:TextBox Enabled="false" ID="Password" type="password" runat="server" Text="" Style="width: 12vw; margin-bottom: 0;" required pattern=".{4,50}" ></asp:TextBox></td>
+                        <td><asp:TextBox Enabled="false" ID="Password" type="password" runat="server" Text="" Style="width: 12vw; margin-bottom: 0; margin-top:0;" required pattern=".{4,50}" ></asp:TextBox></td>
 					</tr>
 					<tr>
 						<th>Telefon:</th>
@@ -68,20 +68,20 @@
 					<tr>
 						<td><asp:Label ID="labTelefon" runat="server" Text="Label"></asp:Label></td>
 						<td><asp:Label ID="labEmail" runat="server" Text="Label"></asp:Label></td>
-                        <td><asp:TextBox Enabled="false" ID="NytPassword" type="password" runat="server" Text="" Style="width: 12vw; margin-bottom: 0;"  required pattern=".{4,50}"></asp:TextBox></td>
+                        <td><asp:TextBox Enabled="false" ID="NytPassword" type="password" runat="server" Text="" Style="width: 12vw; margin-bottom: 0; margin-top:0;"  required pattern=".{4,50}"></asp:TextBox></td>
 					</tr>
 					<tr>
 						<th>Land:</th>
 						<th>By:</th>
                         <th>Gentag Password:</th>
-                        <th rowspan="4">
-                            <asp:Button ID="btnDeleteUser" runat="server" Text="Slet Bruger" class="button" style="width: 10vw; background-color:red;"/>
+                        <th rowspan="4"><br />
+                            <asp:Button ID="btnDeleteUser" runat="server" Text="Slet Bruger" class="button" style="height:10vh; width: 10vw; background-color:red;"/>
                         </th>
 					</tr>
 					<tr>
 						<td><asp:Label ID="labLand" runat="server" Text="Label"></asp:Label></td>
 						<td><asp:Label ID="labBy" runat="server" Text="Label"></asp:Label></td>
-                        <td><asp:TextBox Enabled="false" ID="GentagPassword" type="password" runat="server" Text="" Style="width: 12vw; margin-bottom: 0;"  required pattern=".{4,50}"></asp:TextBox></td>
+                        <td><asp:TextBox Enabled="false" ID="GentagPassword" type="password" runat="server" Text="" Style="width: 12vw; margin-bottom: 0; margin-top:0;"  required pattern=".{4,50}"></asp:TextBox></td>
                     </tr>
                     <tr>
 						<th>Postnr:</th>
@@ -91,7 +91,7 @@
                     <tr>
 						<td><asp:Label ID="labPostnr" runat="server" Text="Label"></asp:Label></td>
 						<td><asp:Label ID="labVej" runat="server" Text="Label"></asp:Label></td>
-                        <td><asp:Button class="button" ID="Button1" runat="server" Text="Skift Password" OnClick="Button1_Click" /></td>
+                        <td><asp:Button class="button" ID="Button1" runat="server" Text="Skift Password" OnClick="Button1_Click"  style="background-color:blue;"/></td>
 					</tr>
 					</table>
                     
@@ -103,24 +103,25 @@
             <br />
             <h1>Memorial Tags:</h1>
             <br />
-            <asp:DataList ID="dl" runat="server" DataSourceID="SqlDataSource1" RepeatLayout="Table" style="width: 100%;">  
+            <asp:DataList ID="dl" runat="server" DataSourceID="SqlDataSourceFrontPage" RepeatLayout="Table" style="width: 100%;">  
         <ItemTemplate>
             <table class="tableView">  
                 <tr onclick="document.location='editor.aspx?id=<%# Eval("GravID") %>'" style="cursor:grab">
-                    <td style="border-bottom: 1px solid #ddd;">ID:  <br /><%# Eval("GravID") %></td>
-                     <td style="border-bottom: 1px solid #ddd;">Navn:  <br /><%# Eval("Fornavn") %> <%# Eval("Efternavn") %></td> 
-                     <td style="border-bottom: 1px solid #ddd;">Født:  <br /><%# Eval("Fødselsdato") %></td> 
-                     <td style="border-bottom: 1px solid #ddd;">Død:  <br /><%# Eval("Dødsdato") %></td>
-                     <td colspan="2" rowspan="2" align="right"><img src="./Uploads/<%# Eval("GravID") %>/profile.jpg" onerror="this.onerror=null;this.src='./Images/profileavatar.png';" alt="Profil Billede" style="max-width: 200px; height: 150px;"/></td>
-
+                    <td style="border-bottom: 1px solid #ddd; width: 5%;">ID:  <br /><%# Eval("GravID") %></td>
+                    <td style="border-bottom: 1px solid #ddd; width: 40%;">Navn:  <br /><%# Eval("Fornavn") %> <%# Eval("Efternavn") %></td> 
+                    <%-- <td style="border-bottom: 1px solid #ddd; width: 20%;">Født:  <br /><%# Convert.ToDateTime(Eval("Fødselsdato")).ToShortDateString() %></td>  
+                    <td style="border-bottom: 1px solid #ddd; width: 20%;">Død:  <br /><%# Convert.ToDateTime(Eval("Dødsdato")).ToShortDateString() %></td> --%>
+                    <td style="border-bottom: 1px solid #ddd; width: 20%;">Født:  <br /><%# (Eval("Fødselsdato")) %></td>  
+                    <td style="border-bottom: 1px solid #ddd; width: 20%;">Død:  <br /><%# (Eval("Dødsdato")) %></td>
+                    <td colspan="2" rowspan="2" align="right"><img src="./Uploads/<%# Eval("GravID") %>/profile.jpg" onerror="this.onerror=null;this.src='./Images/profileavatar.png';" alt="Profil Billede" style="max-width: 200px; height: 150px;"/></td>
                 </tr>
-                
             </table>  
         </ItemTemplate>  
     </asp:DataList>  
             <br />
         </section>
 
+<%-- Vores modal popup der lader brugeren slette sin bruger --%>
 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <ajaxToolkit:ModalPopupExtender ID="mp1" runat="server" PopupControlID="Panel1" TargetControlID="btnDeleteUser" CancelControlID="btnClose" BackgroundCssClass="modalBackground" DropShadow="true">
 
@@ -136,7 +137,7 @@
                     <br />
                     <p style="font-weight:bold;">Bemærk:<br /></p><p>Dette vil slette alle dine brugerdata!</p>
                     <p>Angiv kodeord:</p>
-                    <asp:TextBox ID="txtDeletePass" runat="server" Style="width: 20vw;"></asp:TextBox>
+                    <asp:TextBox ID="txtDeletePass" runat="server" Type="password" Style="width: 20vw;"></asp:TextBox>
                 </ContentTemplate>
             </asp:UpdatePanel>
             <asp:Label ID="labPassError" runat="server" Text="Det angive password er ikke korrekt!" ForeColor="red" Visible="false"></asp:Label><br />

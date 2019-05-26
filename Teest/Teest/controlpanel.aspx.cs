@@ -13,13 +13,17 @@ namespace Teest
         //Det der sker når siden indlæses
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Opretter en datasource som kan bruges under hele Page_Load
             SqlDataSource SqlDataSource1 = new SqlDataSource();                                         //Laver en SqlDataSource
             SqlDataSource1.ID = "SqlDataSource1";                                                       //Giver den et ID
             this.Page.Controls.Add(SqlDataSource1);                                                     //Tilføjer den til siden
+            SqlDataSource1.CancelSelectOnNullParameter = true;
             try
             {
+                //Kigger om brugeren er logget ind
                 if (HttpContext.Current.Session["Username"].ToString() != "")
-                {                  
+                {   
+                    //Forbinder til databasen for at kontrollere at brugernavnet eksisterer og kun findes en gang
                     SqlDataSource1.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["memorialtagConnectionString"].ConnectionString; //Vores connection string som er defineret i web.config
                     SqlDataSource1.SelectCommand = "SELECT COUNT(1) FROM LoginTabel WHERE Brugernavn= '" + HttpContext.Current.Session["Username"].ToString() + "' AND Adgangskode= '" + HttpContext.Current.Session["Password"].ToString() + "'"; //Vores SELECT statement
                     DataView test = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);           //Laver et test dataview til vores template
@@ -39,25 +43,27 @@ namespace Teest
                         try
                         {
                             test = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
-                            labFornavn.Text = test.Table.Rows[0]["Fornavn"].ToString();
-                            labEfternavn.Text = test.Table.Rows[0]["Efternavn"].ToString();
-                            labTelefon.Text = test.Table.Rows[0]["Telefon"].ToString();
-                            labEmail.Text = test.Table.Rows[0]["Mail"].ToString();
-                            labLand.Text = test.Table.Rows[0]["LandNavn"].ToString();
-                            labBy.Text = test.Table.Rows[0]["ByNavn"].ToString();
-                            labPostnr.Text = test.Table.Rows[0]["Postnummer"].ToString();
-                            labVej.Text = test.Table.Rows[0]["Vej"].ToString();
-                            kundeID.Text = "Kunde ID: " + test.Table.Rows[0]["KundeID"].ToString();
                             string TagID = test.Table.Rows[0]["TagID"].ToString();
                             string GravID = test.Table.Rows[0]["GravID"].ToString();
+                            string KundeID = test.Table.Rows[0]["KundeID"].ToString();
+
+                            if (test.Table.Rows[0]["Fornavn"].ToString() != null) { labFornavn.Text = test.Table.Rows[0]["Fornavn"].ToString(); }
+                            if (test.Table.Rows[0]["Efternavn"].ToString() != null) { labEfternavn.Text = test.Table.Rows[0]["Efternavn"].ToString(); }
+                            if (test.Table.Rows[0]["Telefon"].ToString() != null) { labTelefon.Text = test.Table.Rows[0]["Telefon"].ToString(); }
+                            if (test.Table.Rows[0]["Mail"].ToString() != null) { labEmail.Text = test.Table.Rows[0]["Mail"].ToString(); }
+                            if (test.Table.Rows[0]["LandNavn"].ToString() != null) { labLand.Text = test.Table.Rows[0]["LandNavn"].ToString(); }
+                            if (test.Table.Rows[0]["ByNavn"].ToString() != null) { labBy.Text = test.Table.Rows[0]["ByNavn"].ToString(); }
+                            if (test.Table.Rows[0]["Postnummer"].ToString() != null) { labPostnr.Text = test.Table.Rows[0]["Postnummer"].ToString(); }
+                            if (test.Table.Rows[0]["Vej"].ToString() != null) { labVej.Text = test.Table.Rows[0]["Vej"].ToString(); }
+                            if (test.Table.Rows[0]["KundeID"].ToString() != null) { kundeID.Text = "Kunde ID: " + test.Table.Rows[0]["KundeID"].ToString(); }
 
                             //Ny SQL Select kommando på grav tabellen istedet for kunde tabellen
-                            SqlDataSource1.SelectCommand = "SELECT [Fornavn], [Efternavn], [Fødselsdato], [Dødsdato], [GravID] FROM [GravTabel] WHERE [GravID] = '" + GravID + "'";
-                            DataView test2 = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
-                            if (test2.Table.Rows[0]["GravID"].ToString() == null)
-                            {
-                                Response.Redirect("./Error.aspx");
-                            }
+                            SqlDataSource SqlDataSourceFrontPage = new SqlDataSource();                                         //Laver en SqlDataSource
+                            SqlDataSourceFrontPage.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["memorialtagConnectionString"].ConnectionString; //Vores connection string som er defineret i web.config
+                            SqlDataSourceFrontPage.ID = "SqlDataSourceFrontPage";                                               //Giver den et ID
+                            this.Page.Controls.Add(SqlDataSourceFrontPage);                                                     //Tilføjer den til siden
+                            SqlDataSourceFrontPage.SelectCommand = "SELECT [Fornavn], [Efternavn], [Fødselsdato], [Dødsdato], [GravTabel].[GravID] FROM[GravTabel] INNER JOIN TagTabel ON GravTabel.TagID = TagTabel.TagID WHERE KundeID = '" + KundeID + "'";
+                            test = (DataView)SqlDataSourceFrontPage.Select(DataSourceSelectArguments.Empty);
                         }
                         catch
                         {
@@ -65,13 +71,16 @@ namespace Teest
                         }
                     }
                 }
+                else { Response.Redirect("./Error.aspx"); }
             }
             catch { Response.Redirect("./Error.aspx"); }   
         }
 
+        //Vores Skift Password knap der tillader at der skrives i text boksene
         protected void Button1_Click(object sender, EventArgs e)
         {
             string User = Convert.ToString(Session["Username"]);
+            //Hvis knappens tekst er = Godkend
             if (Button1.Text != "Godkend")
             {
                 Password.Enabled = true;
@@ -79,12 +88,14 @@ namespace Teest
                 GentagPassword.Enabled = true;
                 Button1.Text = "Godkend";
             }
-            else
-            {
+            else //Hvis knappens tekst er = Skift Password
+            {   
+                //Hvis kodeordet i tekstboksen mathcer det der er logget ind med
                 if(HttpContext.Current.Session["Password"].ToString() == Password.Text)
-                {
+                {   //Hvis kodeordene i de to bokse er ens
                     if (GentagPassword.Text == NytPassword.Text)
                     {
+                        //Vi skifter sessionsvariablen til det nye password og disabler boksene
                         HttpContext.Current.Session["Password"] = NytPassword.Text;
                         Password.Enabled = false;
                         NytPassword.Enabled = false;
@@ -104,7 +115,7 @@ namespace Teest
                         Password.Text = "";
                         NytPassword.Text = "";
                         GentagPassword.Text = "";
-                    }
+                    }//Giver besked om fejl til brugeren så brugeren selv kan finde ud af at komme videre
                     else { labError.Visible = true; labError.Text = "Nyt Password og Gentag Password er ikke ens!"; labError.ForeColor = System.Drawing.Color.Red; }
                 }
                 else { labError.Visible = true; labError.Text = "Det angive kodeord passer ikke!"; labError.ForeColor = System.Drawing.Color.Red; }
@@ -113,13 +124,48 @@ namespace Teest
 
         }
 
+        //Vores slet bruger knap som ligger i et modal popup vindue
         protected void btnDelete_Click(object sender, EventArgs e)
-        {
+        {   //Hvis det angive brugerord mathcer det der er brugt til at logge ind
             if (txtDeletePass.Text == HttpContext.Current.Session["Password"].ToString())
             {
+                SqlDataSource SqlDataSource1 = new SqlDataSource();                                         //Laver en SqlDataSource
+                SqlDataSource1.ID = "SqlDataSource1";                                                       //Giver den et ID
+                this.Page.Controls.Add(SqlDataSource1);                                                     //Tilføjer den til siden
+
+                //Her sletter vi alle rækker der har med vores KundeID og gøre fra forskellige tabeller
+                SqlDataSource1.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["memorialtagConnectionString"].ConnectionString; //Vores connection string som er defineret i web.config
+                SqlDataSource1.SelectCommand = "SELECT KundeID FROM KundeTabel WHERE Mail = '" + HttpContext.Current.Session["Username"] + "'";
+                DataView test = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+                string KundeID = test.Table.Rows[0]["KundeID"].ToString();
+                SqlDataSource1.SelectCommand = "SELECT [TagID] FROM TagTabel WHERE KundeID = '" + KundeID + "'";
+                test = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+                string tagID = test.Table.Rows[0]["tagID"].ToString();
+
+                SqlDataSource1.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["memorialtagConnectionString"].ConnectionString; //Vores connection string som er defineret i web.config
+                SqlDataSource1.DeleteCommand = "DELETE FROM [LoginTabel] WHERE [KundeID] = '" + KundeID + "'";
+                SqlDataSource1.Delete();
+                SqlDataSource1.DeleteCommand = "DELETE FROM [GravTabel] WHERE [TagID] = '" + tagID + "'";
+                SqlDataSource1.Delete();
+                SqlDataSource1.DeleteCommand = "DELETE FROM [TagTabel] WHERE [KundeID] = '" + KundeID + "'";
+                SqlDataSource1.Delete();
+                SqlDataSource1.DeleteCommand = "DELETE FROM [KundeTabel] WHERE [KundeID] = '" + KundeID + "'";
+                SqlDataSource1.Delete();
+
+                //Nulstiller sessionsvariablerne
+                HttpContext.Current.Session["Username"] = "";
+                HttpContext.Current.Session["Password"] = "";
+
+                //Videredirigerer til forsiden
                 Response.Redirect("./default.aspx");
-            }
+            }   //Viser vores fejlbesked til brugeren
             else { labPassError.Visible = true; }
+        }
+           
+        //Sender brugeren videre til produkt siden
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("./products.aspx");
         }
     }
 }
